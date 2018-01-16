@@ -33,6 +33,6 @@
 #    docker network rm cnalan
 #fi
 
-docker stack rm cna
+sudo docker stack rm cna
 sleep 5
-docker service ls
+sudo docker service ls

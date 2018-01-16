@@ -30,19 +30,19 @@ sed -i "s/##REGISTRY##/$REGISTRY/" docker-compose-v3.yml
 sed -i "s/keystone/$KEYSTONE/" `dirname $0`/microservices/p/p.conf
 sed -i "s/keystone/$KEYSTONE/" `dirname $0`/microservices/w1/w1.conf
 
-# Start vizualizer on port 8080
-which docker-machine > /dev/null 2>&1 
-if [ $? -ne 0 ]; then
-	ENVOPT=""
-else
-	ENVOPT="-e HOST=$(docker-machine ls | head -2 | grep -v NAME | awk '{print $5}' | sed 's#tcp://##' | sed 's#:2376##') -e PORT=8080"
-fi
+## Start vizualizer on port 8080
+#which docker-machine > /dev/null 2>&1 
+#if [ $? -ne 0 ]; then
+#	ENVOPT=""
+#else
+#	ENVOPT="-e HOST=$(docker-machine ls | head -2 | grep -v NAME | awk '{print $5}' | sed #'s#tcp://##' | sed 's#:2376##') -e PORT=8080"
+#fi
 
-docker ps | grep visualizer > /dev/null 2>&1
-if [ $? -ne 0 ]; then
-    docker ps -a | grep visualizer && docker rm visualizer
-    docker run -it -d -p 8080:8080 $ENVOPT -v /var/run/docker.sock:/var/run/docker.sock --name visualizer dockersamples/visualizer
-fi
+#docker ps | grep visualizer > /dev/null 2>&1
+#if [ $? -ne 0 ]; then
+#    docker ps -a | grep visualizer && docker rm visualizer
+#    docker run -it -d -p 8080:8080 $ENVOPT -v /var/run/docker.sock:/var/run/docker.sock --#name visualizer dockersamples/visualizer
+#fi
 
 # Build images if not done yet
 for a in web i b p s w w1 w2 db; do

@@ -17,14 +17,14 @@ W2_DOMAIN=domain
 
 
 # Patch docker-compose-v3.yaml to pass our variables
-sed -i "s/##MYSQL_ROOT_PASSWORD##/$MYSQL_ROOT_PASSWORD/" docker-compose-v3.yml
-sed -i "s/##MYSQL_DATABASE##/$MYSQL_DATABASE/" docker-compose-v3.yml
-sed -i "s/##MYSQL_USER##/$MYSQL_USER/" docker-compose-v3.yml
-sed -i "s/##MYSQL_PASSWORD##/$MYSQL_PASSWORD/" docker-compose-v3.yml
-sed -i "s/##W2_APIKEY##/$W2_APIKEY/" docker-compose-v3.yml
-sed -i "s/##W2_TO##/$W2_TO/" docker-compose-v3.yml
-sed -i "s/##W2_DOMAIN##/$W2_DOMAIN/" docker-compose-v3.yml
-sed -i "s/##REGISTRY##/$REGISTRY/" docker-compose-v3.yml
+sed -i "s/##MYSQL_ROOT_PASSWORD##/$MYSQL_ROOT_PASSWORD/" docker-compose.yml
+sed -i "s/##MYSQL_DATABASE##/$MYSQL_DATABASE/" docker-compose.yml
+sed -i "s/##MYSQL_USER##/$MYSQL_USER/" docker-compose.yml
+sed -i "s/##MYSQL_PASSWORD##/$MYSQL_PASSWORD/" docker-compose.yml
+sed -i "s/##W2_APIKEY##/$W2_APIKEY/" docker-compose.yml
+sed -i "s/##W2_TO##/$W2_TO/" docker-compose.yml
+sed -i "s/##W2_DOMAIN##/$W2_DOMAIN/" docker-compose.yml
+sed -i "s/##REGISTRY##/$REGISTRY/" docker-compose.yml
 
 # Patch the p and w1 conf files to point to the SWIFT instance
 sed -i "s/keystone/$KEYSTONE/" `dirname $0`/microservices/p/p.conf

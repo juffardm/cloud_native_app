@@ -52,6 +52,8 @@ for a in web i b p s w w1 w2 db; do
 	fi
 done
 
+echo "PUSH"
+
 # Push images in Registry if not done yet
 for a in web i b p s w w1 w2 db; do
 	img=`docker images | grep -E "^$REGISTRY:cloudnativeapp_$a "`
@@ -60,6 +62,8 @@ for a in web i b p s w w1 w2 db; do
 		#docker push $REGISTRY:cloudnativeapp_$a
 	fi
 done
+
+echo "FIN PUSH"
 
 # Launch services - Should be replaced by docker-compose v3 once available
 #for a in web i b p s w w1 w2 db; do

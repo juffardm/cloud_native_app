@@ -79,6 +79,6 @@ done
 #	fi
 #done
 
-docker stack deploy -c docker-compose-v3.yml cna
+docker stack deploy -c docker-compose.yml cna
 sleep 5
 docker service ls

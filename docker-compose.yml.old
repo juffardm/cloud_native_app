@@ -1,4 +1,4 @@
-version: "3"
+version: "2"
 services:
     rabbit:
         image:
@@ -20,18 +20,20 @@ services:
                 aliases:
                     - redis
     db:
-        image: ##REGISTRY##/cloudnativeapp_db
+        build:
+            context: db
         environment:
-            - MYSQL_ROOT_PASSWORD=##MYSQL_ROOT_PASSWORD##
-            - MYSQL_DATABASE=##MYSQL_DATABASE##
-            - MYSQL_USER=##MYSQL_USER##
-            - MYSQL_PASSWORD=##MYSQL_PASSWORD##
+          - MYSQL_ROOT_PASSWORD=toto
+          - MYSQL_DATABASE=prestashop
+          - MYSQL_USER=prestashop
+          - MYSQL_PASSWORD=prestashop1234
         networks:
             cnalan:
                 aliases:
                     - db
     web:
-        image: ##REGISTRY##/cloudnativeapp_web
+        build:
+            context: web
         ports:
             - "80:80"
         links:
@@ -42,7 +44,8 @@ services:
         networks:
             cnalan:
     i:
-        image: ##REGISTRY##/cloudnativeapp_i
+        build:
+            context: microservices/i
         links:
             - db
         networks:
@@ -50,7 +53,8 @@ services:
               aliases:
                 - i
     s:
-        image: ##REGISTRY##/cloudnativeapp_s
+        build:
+            context: microservices/s
         links:
             - redis
         networks:
@@ -58,7 +62,8 @@ services:
               aliases:
                 - s
     b:
-        image: ##REGISTRY##/cloudnativeapp_b
+        build:
+            context: microservices/b
         links:
             - w
             - rabbit
@@ -67,19 +72,22 @@ services:
               aliases:
                 - b
     p:
-        image: ##REGISTRY##/cloudnativeapp_p
+        build:
+            context: microservices/p
         networks:
             cnalan:
               aliases:
                 - p
     w:
-        image: ##REGISTRY##/cloudnativeapp_w
+        build:
+            context: microservices/w
         networks:
             cnalan:
               aliases:
                 - w
     w1:
-        image: ##REGISTRY##/cloudnativeapp_w1
+        build:
+            context: microservices/w1
         links:
           - rabbit
           - redis
@@ -88,17 +96,18 @@ services:
               aliases:
                 - w1
     w2:
-        image: ##REGISTRY##/cloudnativeapp_w2
+        build:
+            context: microservices/w2
         links:
           - rabbit
         environment:
-          - W2_APIKEY=##W2_APIKEY##
-          - W2_TO=##W2_TO##
-          - W2_DOMAIN=##W2_DOMAIN##
+          - W2_APIKEY=key-blabla
+          - W2_TO=mail@bla
+          - W2_DOMAIN=mydomain
         networks:
             cnalan:
               aliases:
                 - w2
 networks:
     cnalan:
-        driver: overlay
+        driver: bridge

@@ -4,7 +4,7 @@
 
 #
 # You need to provide your Registry address here:
-REGISTRY=groupe7
+REGISTRY=lab7imag/repositorylab7
 #REGISTRY=lab7-2.labossi.hpintelco.org:5500
 KEYSTONE=labossi.hpintelco.org
 MYSQL_ROOT_PASSWORD=toto
@@ -54,10 +54,10 @@ done
 
 # Push images in Registry if not done yet
 for a in web i b p s w w1 w2 db; do
-	img=`docker images | grep -E "^$REGISTRY/cloudnativeapp_$a "`
+	img=`docker images | grep -E "^$REGISTRY:cloudnativeapp_$a "`
 	if [ _"$img" = _"" ]; then
-		docker tag cloudnativeapp_$a $REGISTRY/cloudnativeapp_$a
-		docker push $REGISTRY/cloudnativeapp_$a
+		docker tag cloudnativeapp_$a $REGISTRY:cloudnativeapp_$a
+		#docker push $REGISTRY:cloudnativeapp_$a
 	fi
 done
 

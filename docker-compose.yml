@@ -20,18 +20,18 @@ services:
                 aliases:
                     - redis
     db:
-        image: ##REGISTRY##/cloudnativeapp_db
+        image: lab7imag/repositorylab7:cloudnativeapp_db
         environment:
-            - MYSQL_ROOT_PASSWORD=##MYSQL_ROOT_PASSWORD##
-            - MYSQL_DATABASE=##MYSQL_DATABASE##
-            - MYSQL_USER=##MYSQL_USER##
-            - MYSQL_PASSWORD=##MYSQL_PASSWORD##
+            - MYSQL_ROOT_PASSWORD=toto
+            - MYSQL_DATABASE=prestashop
+            - MYSQL_USER=prestashop
+            - MYSQL_PASSWORD=prestashop1234
         networks:
             cnalan:
                 aliases:
                     - db
     web:
-        image: ##REGISTRY##/cloudnativeapp_web
+        image: lab7imag/repositorylab7:cloudnativeapp_web
         ports:
             - "80:80"
         links:
@@ -42,7 +42,7 @@ services:
         networks:
             cnalan:
     i:
-        image: ##REGISTRY##/cloudnativeapp_i
+        image: lab7imag/repositorylab7:cloudnativeapp_i
         links:
             - db
         networks:
@@ -50,7 +50,7 @@ services:
               aliases:
                 - i
     s:
-        image: ##REGISTRY##/cloudnativeapp_s
+        image: lab7imag/repositorylab7:cloudnativeapp_s
         links:
             - redis
         networks:
@@ -58,7 +58,7 @@ services:
               aliases:
                 - s
     b:
-        image: ##REGISTRY##/cloudnativeapp_b
+        image: lab7imag/repositorylab7:cloudnativeapp_b
         links:
             - w
             - rabbit
@@ -67,19 +67,19 @@ services:
               aliases:
                 - b
     p:
-        image: ##REGISTRY##/cloudnativeapp_p
+        image: lab7imag/repositorylab7:cloudnativeapp_p
         networks:
             cnalan:
               aliases:
                 - p
     w:
-        image: ##REGISTRY##/cloudnativeapp_w
+        image: lab7imag/repositorylab7:cloudnativeapp_w
         networks:
             cnalan:
               aliases:
                 - w
     w1:
-        image: ##REGISTRY##/cloudnativeapp_w1
+        image: lab7imag/repositorylab7:cloudnativeapp_w1
         links:
           - rabbit
           - redis
@@ -88,13 +88,13 @@ services:
               aliases:
                 - w1
     w2:
-        image: ##REGISTRY##/cloudnativeapp_w2
+        image: lab7imag/repositorylab7:cloudnativeapp_w2
         links:
           - rabbit
         environment:
-          - W2_APIKEY=##W2_APIKEY##
-          - W2_TO=##W2_TO##
-          - W2_DOMAIN=##W2_DOMAIN##
+          - W2_APIKEY=blakey
+          - W2_TO=machin@bidule.com
+          - W2_DOMAIN=domain
         networks:
             cnalan:
               aliases:

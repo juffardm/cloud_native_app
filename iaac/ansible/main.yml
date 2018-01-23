@@ -1,0 +1,59 @@
+---
+
+- hosts: all
+  become: true
+  remote_user: ubuntu
+  tasks:
+  - name: install Openjdk
+    apt: name=openjdk-8-jdk state=latest
+
+  - name: uninstall docker
+    apt: name=docker state=absent purge=yes
+
+  - name: uninstall docker-engine
+    apt: name=docker-engine state=absent purge=yes
+
+  - name: uninstall docker.io
+    apt: name=docker.io state=absent purge=yes
+
+  - name: install apt-transport-https
+    apt: name=apt-transport-https state=latest
+
+  - name: install ca-certificates
+    apt: name=ca-certificates state=latest
+
+  - name: install curl
+    apt: name=curl state=latest
+
+  - name: install software-properties-common
+    apt: name=software-properties-common state=latest
+
+  - name: get docker key
+    apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+  - name: adding docker repo
+    apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+        state: present
+
+  - name: installing docker
+    apt: name=docker-ce update_cache=yes state=latest
+
+
+
+- hosts: jenkins
+  become: true
+  remote_user: ubuntu
+  tasks:
+    - name: adding jenkins key
+      apt_key:
+          url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+          state: present
+    - name: adding jenkins repo
+      apt_repository:
+          repo: deb https://pkg.jenkins.io/debian-stable binary/
+          state: present
+    - name: installing jenkins
+      apt: name=jenkins update_cache=yes state=latest

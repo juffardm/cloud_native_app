@@ -24,7 +24,7 @@ sed -i "s/##MYSQL_PASSWORD##/$MYSQL_PASSWORD/" docker-compose.yml
 sed -i "s/##W2_APIKEY##/$W2_APIKEY/" docker-compose.yml
 sed -i "s/##W2_TO##/$W2_TO/" docker-compose.yml
 sed -i "s/##W2_DOMAIN##/$W2_DOMAIN/" docker-compose.yml
-sed -i "s/##REGISTRY##/$REGISTRY/" docker-compose.yml
+sed -i "s|##REGISTRY##|$REGISTRY|" docker-compose.yml
 
 # Patch the p and w1 conf files to point to the SWIFT instance
 sed -i "s/keystone/$KEYSTONE/" `dirname $0`/microservices/p/p.conf

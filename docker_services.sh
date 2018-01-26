@@ -52,17 +52,7 @@ for a in web i b p s w w1 w2 db; do
 	fi
 done
 
-echo "PUSH"
-
-# Push images in Registry if not done yet
-for a in web i b p s w w1 w2 db; do
-	img=`docker images | grep -E "^$REGISTRY:cloudnativeapp_$a "`
-	if [ _"$img" = _"" ]; then
-		echo "tag and push"
-		#docker tag cloudnativeapp_$a $REGISTRY:cloudnativeapp_$a
-		#docker push $REGISTRY:cloudnativeapp_$a
-	fi
-done
+docker-compose pull
 
 echo "FIN PUSH"
 

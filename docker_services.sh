@@ -58,6 +58,7 @@ echo "PUSH"
 for a in web i b p s w w1 w2 db; do
 	img=`docker images | grep -E "^$REGISTRY:cloudnativeapp_$a "`
 	if [ _"$img" = _"" ]; then
+		echo "tag and push"
 		#docker tag cloudnativeapp_$a $REGISTRY:cloudnativeapp_$a
 		#docker push $REGISTRY:cloudnativeapp_$a
 	fi

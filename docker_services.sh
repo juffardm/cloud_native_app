@@ -44,17 +44,8 @@ sed -i "s/keystone/$KEYSTONE/" `dirname $0`/microservices/w1/w1.conf
 #    docker run -it -d -p 8080:8080 $ENVOPT -v /var/run/docker.sock:/var/run/docker.sock --#name visualizer dockersamples/visualizer
 #fi
 
-# Build images if not done yet
-for a in web i b p s w w1 w2 db; do
-	img=`docker images | grep -E "^cloudnativeapp_$a "`
-	if [ _"$img" = _"" ]; then
-		docker-compose build
-	fi
-done
-
+#get last version of containers
 docker-compose pull
-
-echo "FIN PUSH"
 
 # Launch services - Should be replaced by docker-compose v3 once available
 #for a in web i b p s w w1 w2 db; do

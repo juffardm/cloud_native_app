@@ -44,8 +44,12 @@ sed -i "s/keystone/$KEYSTONE/" `dirname $0`/microservices/w1/w1.conf
 #    docker run -it -d -p 8080:8080 $ENVOPT -v /var/run/docker.sock:/var/run/docker.sock --#name visualizer dockersamples/visualizer
 #fi
 
+#not what we want
 #get last version of containers
-docker-compose pull
+#docker-compose pull
+
+docker-compose build
+
 
 # Launch services - Should be replaced by docker-compose v3 once available
 #for a in web i b p s w w1 w2 db; do

@@ -31,6 +31,8 @@ services:
                 aliases:
                     - db
     web:
+        build:
+            context: ./web
         image: lab7imag/repositorylab7:cloudnativeapp_web
         ports:
             - "80:80"

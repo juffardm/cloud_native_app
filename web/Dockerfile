@@ -6,6 +6,7 @@ COPY index.html /var/www/html/
 COPY favicon.ico /var/www/html/
 COPY js /var/www/html/js/
 COPY css /var/www/html/css/
+RUN cat /var/www/html/css/starter-template.css
 COPY img /var/www/html/img/
 COPY templates/cna.conf.docker /etc/apache2/sites-available/cna.conf
 COPY js/config.js /var/www/html/js/config.js

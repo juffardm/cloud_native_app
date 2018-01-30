@@ -3,6 +3,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 RUN apt-get install -y apache2
 COPY index.html /var/www/html/
+RUN cat /var/www/html/index.html
 COPY favicon.ico /var/www/html/
 COPY js /var/www/html/js/
 COPY css /var/www/html/css/

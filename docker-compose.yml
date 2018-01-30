@@ -20,6 +20,8 @@ services:
                 aliases:
                     - redis
     db:
+        build:
+            context: ./db
         image: lab7imag/repositorylab7:cloudnativeapp_db
         environment:
             - MYSQL_ROOT_PASSWORD=toto
@@ -44,6 +46,8 @@ services:
         networks:
             cnalan:
     i:
+        build:
+            context: ./microservices/i
         image: lab7imag/repositorylab7:cloudnativeapp_i
         links:
             - db
@@ -52,6 +56,8 @@ services:
               aliases:
                 - i
     s:
+        build:
+            context: ./microservices/s
         image: lab7imag/repositorylab7:cloudnativeapp_s
         links:
             - redis
@@ -60,6 +66,8 @@ services:
               aliases:
                 - s
     b:
+        build:
+            context: ./microservices/b
         image: lab7imag/repositorylab7:cloudnativeapp_b
         links:
             - w
@@ -69,18 +77,24 @@ services:
               aliases:
                 - b
     p:
+        build:
+            context: ./microservices/p
         image: lab7imag/repositorylab7:cloudnativeapp_p
         networks:
             cnalan:
               aliases:
                 - p
     w:
+        build:
+            context: ./microservices/w
         image: lab7imag/repositorylab7:cloudnativeapp_w
         networks:
             cnalan:
               aliases:
                 - w
     w1:
+        build:
+            context: ./microservices/w1
         image: lab7imag/repositorylab7:cloudnativeapp_w1
         links:
           - rabbit
@@ -90,6 +104,8 @@ services:
               aliases:
                 - w1
     w2:
+        build:
+            context: ./microservices/w2
         image: lab7imag/repositorylab7:cloudnativeapp_w2
         links:
           - rabbit
